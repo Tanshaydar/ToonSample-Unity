@@ -36,7 +36,7 @@ public class PXR_Audio_Spatializer_SceneMaterial : MonoBehaviour
     private void OnValidate()
     {
         if (spatialAudioContextRef == null)
-            spatialAudioContextRef = FindObjectOfType<PXR_Audio_Spatializer_Context>();
+            spatialAudioContextRef = FindFirstObjectByType<PXR_Audio_Spatializer_Context>();
         if (lastMaterialPreset != materialPreset) // material_preset is changed
         {
             if (materialPreset != PXR_Audio.Spatializer.AcousticsMaterial.Custom)

@@ -523,7 +523,8 @@ public partial class PXR_Audio_Spatializer_Context : MonoBehaviour
         }
 
         //  Add all the geometries back
-        PXR_Audio_Spatializer_SceneGeometry[] geometries = FindObjectsOfType<PXR_Audio_Spatializer_SceneGeometry>();
+        PXR_Audio_Spatializer_SceneGeometry[] geometries =
+            FindObjectsByType<PXR_Audio_Spatializer_SceneGeometry>(FindObjectsSortMode.None);
         for (int geoId = 0; geoId < geometries.Length; ++geoId)
         {
             //  For all found geometry and material pair, submit them into Pico spatializer
@@ -547,7 +548,8 @@ public partial class PXR_Audio_Spatializer_Context : MonoBehaviour
         if (spatializerApiImpl != SpatializerApiImpl.wwise)
         {
             //  Add all the sources back
-            PXR_Audio_Spatializer_AudioSource[] sources = FindObjectsOfType<PXR_Audio_Spatializer_AudioSource>();
+            PXR_Audio_Spatializer_AudioSource[] sources =
+                FindObjectsByType<PXR_Audio_Spatializer_AudioSource>(FindObjectsSortMode.None);
             for (int i = 0; i < sources.Length; ++i)
             {
                 sources[i].RegisterInternal();
@@ -555,7 +557,7 @@ public partial class PXR_Audio_Spatializer_Context : MonoBehaviour
         }
 
         //  Add listener back
-        PXR_Audio_Spatializer_AudioListener listener = FindObjectOfType<PXR_Audio_Spatializer_AudioListener>();
+        PXR_Audio_Spatializer_AudioListener listener = FindFirstObjectByType<PXR_Audio_Spatializer_AudioListener>();
         listener.RegisterInternal();
     }
 
@@ -575,7 +577,8 @@ public partial class PXR_Audio_Spatializer_Context : MonoBehaviour
         do
         {
             canContinue = true;
-            PXR_Audio_Spatializer_AudioListener[] listeners = FindObjectsOfType<PXR_Audio_Spatializer_AudioListener>();
+            PXR_Audio_Spatializer_AudioListener[] listeners =
+                FindObjectsByType<PXR_Audio_Spatializer_AudioListener>(FindObjectsSortMode.None);
             foreach (var listener in listeners)
             {
                 if (listener != null && listener.IsAudioDSPInProgress)
@@ -585,7 +588,8 @@ public partial class PXR_Audio_Spatializer_Context : MonoBehaviour
                 }
             }
 
-            PXR_Audio_Spatializer_AudioSource[] sources = FindObjectsOfType<PXR_Audio_Spatializer_AudioSource>();
+            PXR_Audio_Spatializer_AudioSource[] sources =
+                FindObjectsByType<PXR_Audio_Spatializer_AudioSource>(FindObjectsSortMode.None);
             foreach (var source in sources)
             {
                 if (source != null && source.IsAudioDSPInProgress)
@@ -635,7 +639,7 @@ public partial class PXR_Audio_Spatializer_Context : MonoBehaviour
         }
 
         //  Resume all sources playback
-        var sources = FindObjectsOfType<PXR_Audio_Spatializer_AudioSource>();
+        var sources = FindObjectsByType<PXR_Audio_Spatializer_AudioSource>(FindObjectsSortMode.None);
         foreach (var source in sources)
         {
             source.Resume();
@@ -643,7 +647,7 @@ public partial class PXR_Audio_Spatializer_Context : MonoBehaviour
 
         //  Resume all ambisonic sources playback
         var ambisonicSources =
-            FindObjectsOfType<PXR_Audio_Spatializer_AmbisonicSource>();
+            FindObjectsByType<PXR_Audio_Spatializer_AmbisonicSource>(FindObjectsSortMode.None);
         foreach (var source in ambisonicSources)
         {
             source.Resume();
